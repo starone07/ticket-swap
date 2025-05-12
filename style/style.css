@@ -1,210 +1,105 @@
-body {
-  font-family: 'Montserrat', sans-serif; /* Using Montserrat as the primary font */
-  color: #333; /* Dark gray text for general readability */
-  line-height: 1.6; /* Increased line height for better text spacing */
-}
+.screening-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100px;
+        }
 
-/* Container Styles */
-.container {
-  max-width: 1200px; /* Limits the maximum width of the main content area */
-  margin: 0 auto; /* Centers the container horizontally */
-  padding: 20px; /* Adds padding around the content */
-}
+        .screening-details {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
 
-/* Headings */
-h1, h2, h3 {
-  font-weight: bold; /* Makes headings bold */
-  color: #222; /* Very dark gray for headings */
-  margin-bottom: 20px; /* Adds space below headings */
-}
-h1 {
-  font-size: 2.5rem; /* Large font size for main heading */
-}
-h2 {
-  font-size: 2rem; /* Medium font size for section titles */
-}
-h3{
-  font-size: 1.5rem;
-}
+        .screening-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 4px;
+        }
 
-/* Links */
-a {
-  color: #0078d7; /* Standard blue color for links */
-  text-decoration: none; /* Removes underline from links */
-}
+        .full-button {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 12px;
+            margin-top: 8px;
+            align-self: flex-start;
+        }
 
-a:hover {
-  color: #0056b3; /* Darker blue on hover */
-  text-decoration: underline; /* Adds underline on hover for better feedback */
-}
+        .full-button:hover {
+            background-color: #c53030;
+        }
 
-/* Buttons */
-.button {
-  padding: 12px 25px; /* Decent padding for buttons */
-  font-size: 1rem; /* Button text size */
-  font-weight: bold; /* Bold button text */
-  color: white; /* White text color */
-  background-color: #0078d7; /* Blue background color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Slightly rounded corners */
-  cursor: pointer; /* Shows a pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
+        .date-button.active {
+            background-color: #4a5568;
+            color: white;
+        }
 
-.button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-}
+        #screening-selection-containers {
+            display: flex;
+            flex-direction: column;
+        }
 
-.button.secondary {
-  background-color: #6c757d; /* Gray background for secondary buttons */
-}
-.button.secondary:hover{
-   background-color: #5a6268;
-}
+        .selected-button {
+            background-color: #48bb78;
+            color: white;
+            pointer-events: none;
+        }
+        .selected-button:hover {
+             background-color: #48bb78;
+        }
 
-/* Form elements */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select {
-  padding: 10px;
-  font-size: 1rem;
-  width: 100%; /* Full width within their container */
-  border: 1px solid #ddd; /* Light gray border */
-  border-radius: 5px; /* Rounded corners */
-  margin-bottom: 15px; /* Space below form elements */
-  box-sizing: border-box; /* Include padding and border in element's total width */
-}
+        .date-with-day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 10px;
+        }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-select:focus {
-  outline: none; /* Remove default outline */
-  border-color: #0078d7; /* Blue border on focus */
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Subtle blue shadow on focus */
-}
+        .day-of-week {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 2px;
+        }
 
-label {
-  display: block; /* Make labels take up full width */
-  margin-bottom: 5px; /* Space below labels */
-  color: #555; /* Medium gray text for labels */
-  font-weight: bold;
-}
+        .date-numeric {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
 
-/* Lists */
-ul {
-  list-style: none; /* Remove default list style (bullets) */
-  padding: 0;
-  margin: 0;
-}
+        #confirm-selection-button {
+            margin-top: 20px;
+        }
 
-ul li {
-  margin-bottom: 10px; /* Space between list items */
-}
+        .header-container {
+            background: #C09E65;
+            padding: 1rem 0; /* Add padding to the container */
+            margin-bottom: 2rem;
+            text-align: center; /* Center the heading */
+        }
 
-/* Layout helpers */
-.flex {
-  display: flex; /* Enable flexbox layout */
-  align-items: center; /* Vertically center items */
-}
-
-.justify-content-center {
-  justify-content: center; /* Horizontally center items */
-}
-.justify-content-between{
-  justify-content: space-between;
-}
-
-.text-center{
-  text-align: center;
-}
-
-.mt-1{
-  margin-top: 1rem;
-}
-.mt-2{
-  margin-top: 2rem;
-}
-.mb-2{
-  margin-bottom: 2rem;
-}
-.mb-4{
-  margin-bottom: 4rem;
-}
-
-/* Responsive Grid Layout */
-.row {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
-  margin-right: -15px; /* Adjust margins to account for padding in columns */
-  margin-left: -15px;
-}
-
-[class*="col-"] {
-  /* Default styles for all columns */
-  position: relative;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  box-sizing: border-box; /* Include padding and border in element's total width */
-}
-
-.col-sm-6 {
-  /* Styles for small screens and up ( телефоны) */
-  flex: 0 0 50%; /* Take up 50% of the row width */
-  max-width: 50%;
-}
-
-.col-md-4 {
-  /* Styles for medium screens and up (планшеты) */
-  flex: 0 0 33.3333%; /* Take up 33.3333% of the row width */
-  max-width: 33.3333%;
-}
-
-.col-lg-3 {
-  /* Styles for large screens and up (десктопы) */
-  flex: 0 0 25%; /* Take up 25% of the row width */
-  max-width: 25%;
-}
-/*Utility classes*/
-.hidden{
-  display: none;
-}
-.block{
-  display: block;
-}
-.inline-block{
-  display: inline-block
-}
-
-/*Specific styles*/
-.logo{
-  max-width: 150px;
-  height: auto;
-}
-
-.movie-card {
-  background: #FFF;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.1);
-  margin-bottom: 20px;
-}
-.movie-card-header{
-  display: flex;
-  padding: 15px;
-  border-bottom: 1px solid #DDD;
-}
-.movie-card-title{
-  margin-left: 15px;
-}
-.movie-card-content{
-  padding: 15px;
-}
-.movie-poster{
-  width: 100px;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
+        .header-text {
+            color: white; /* Set the text color to white */
+            font-weight: 700;  /* Make the text bold */
+            font-size: 2.5rem; /* Adjust size as needed */
+            display: inline-block; /* Ensure the text is treated as a block */
+        }
+       .full-text {
+            color: #e53e3e;
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 8px;
+            align-self: flex-start;
+        }

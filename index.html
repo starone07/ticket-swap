@@ -468,4 +468,89 @@
                      alert("You cannot select the same ticket for swapping!");
                      return;
                  }
+                 
+                 const offeredTicket = userTickets.find(ticket => ticket.id === selectedOfferedTicketId); 
+                 const requestedTicket = screenings.find(screening => screening.id === selectedRequestedTicketId);            
+            
+            offeredTicketNameDisplay.textContent = `${offeredTicket.name} (${offeredTicket.screeningDate} ${offeredTicket.screeningTime})`;
+            requestedTicketNameDisplay.textContent = `${requestedTicket.name} (${requestedTicket.screeningDate} ${requestedTicket.screeningTime})`;
+
+                        showPage("confirmation-page");
+        });
+                    goBackButton.addEventListener("click", () => {
+            showPage("ticket-selection-page");
+                        
+                    });
+
+                    confirmSwapButton.addEventListener("click", () => {
+                                    showPage("email-input-page");
+
+                    });
+        submitEmailButton.addEventListener("click", () => {
+            userEmail = emailInput.value.trim();
+            if (!userEmail) {
+
+             emailInputError.textContent = "Please enter your email address."; 
+                emailInputError.style.display = "block";
+                return;
+            } else if (!isValidEmail(userEmail))
+
+                emailInputError.textContent = "Please enter a valid email address.";
+                emailInputError.style.display = "block";
+                return;
+            } else{
+                  emailInputError.style.display = "none";
+            }
+            
+
+            console.log("Sending data to server:", { requestedTicketId: selectedRequestedTicketId,
+                                                   offeredTicketId: selectedOfferedTicketId,
+                                                    email: userEmail,
+                                                   });
+         
+            setTimeout(() => {
+                showPage("success-message");
+                setTimeout(() => {
+
+// Reset the form selectedOfferedTicketId
+                    selectedOfferedTicketId = null;
+                    selectedRequestedTickets = {};
+                    userEmail = "";
+                    selectedDate = null;
+                    emailInput.value = "";
+
+                    showPage("ticket-selection-page");
+
+                    document.querySelectorAll('.date-button').forEach(button => button.classList.remove('active'));
+                    
+                    screeningSelectionContainers.innerHTML = '';
+                    populateDatePicker();
+                }, 2000);
+
+          }, 1000);
+
+});
+        function isValidEmail(email){
+
+// Basic email validation regex const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            return emailRegex.test(email);
+        }
+
+// Initialize the app
+
+document.addEventListener ("DOMContentLoaded", () => {
+
+populateDatePicker();
+
+showPage("ticket-selection-page");
+
+});
+
+</script>
+
+</body>
+
+</html>
+        
             

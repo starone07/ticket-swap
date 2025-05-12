@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,80 +8,58 @@
     <title>Cannes Ticket Swap</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="style/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-4">
-        <h1 class="page-title">Cannes Ticket Swap</h1>
+        <div class="header-container">
+            <h1 class="header-text">3 Days in Cannes Period 1 Ticket Swaps</h1>
+        </div>
 
         <div id="main-content">
-            <div id="ticket-selection-page" class="space-y-6">
-                <h2 class="section-title">Select Your Ticket</h2>
-                <div class="form-group">
-                    <label for="my-tickets" class="form-label">Your Tickets:</label>
-                    <div class="dropdown-wrapper" id="my-tickets-dropdown-wrapper">
-                        <div class="custom-select-trigger" id="my-tickets-trigger">
-                            <span>Select a ticket you have</span>
-             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                        </div>
-                        <div class="custom-options" id="my-tickets-options">
-                            <ul id="my-tickets-list">
-                                 <li data-value="" class="selected">Select a ticket you have</li>
-                            </ul>
-                        </div>
-                         <select id="my-tickets" class="form-input hidden" required>
-                            <option value="" disabled selected>Select a ticket you have</option>
-                        </select>
+            <div id="date-selection-section" class="mb-6">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Select Date</h2>
+                <div id="date-picker" class="flex justify-center space-x-2">
                     </div>
+            </div>
+
+            <div id="ticket-selection-page" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">Select Your Ticket</h2>
+                <div id="my-tickets-dropdown" class="form-group">
+                    <label for="my-tickets" class="form-label">Your Tickets:</label>
+                    <select id="my-tickets" class="form-input" required>
+                        <option value="" disabled selected>Select a ticket you have</option>
+                    </select>
                     <div id="my-tickets-error" class="error-message" style="display: none;"></div>
                 </div>
-                <div class="form-group">
-                    <label for="screening-list" class="form-label">Screening:</label>
-                     <div class="dropdown-wrapper" id="screening-list-dropdown-wrapper">
-                        <div class="custom-select-trigger" id="screening-list-trigger">
-                            <span>Select a screening you want</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                        </div>
-                        <div class="custom-options" id="screening-list-options">
-                            <ul id="screening-list-ul">
-                                <li data-value="" class="selected">Select a screening you want</li>
-                            </ul>
-                        </div>
-                        <select id="screening-list" class="form-input hidden" required>
-                            <option value="" disabled selected>Select a screening you want</option>
-                        </select>
+                <div id="screening-selection-containers">
                     </div>
-                    <div id="screening-list-error" class="error-message" style="display: none;"></div>
-                </div>
                 <button id="confirm-selection-button" class="btn">Confirm Selection</button>
             </div>
 
-            <div id="confirmation-page" class="space-y-6 hidden">
-                <h2 class="section-title">Confirm Swap</h2>
-                <div class="bg-white rounded-md shadow-md p-6">
-                    <p class="text-gray-700">You are offering your ticket for: <span id="offered-ticket-name" class="font-semibold text-blue-600"></span></p>
-                    <p class="text-gray-700 mt-2">In exchange for a ticket to: <span id="requested-ticket-name" class="font-semibold text-blue-600"></span></p>
-                </div>
-                <div class="flex justify-start mt-4">
-                    <button id="go-back-button" class="btn-secondary mr-2">Go Back</button>
-                    <button id="confirm-swap-button" class="btn">Confirm Swap</button>
-                </div>
+            <div id="confirmation-page" class="space-y-4 hidden">
+                <h2 class="text-2xl font-semibold text-gray-700">Confirm Swap</h2>
+                <p>You are offering your ticket for: <span id="offered-ticket-name" class="font-semibold"></span></p>
+                <p>In exchange for a ticket to: <span id="requested-ticket-name" class="font-semibold"></span></p>
+                <button id="go-back-button" class="btn bg-gray-400 hover:bg-gray-500 mr-2">Go Back</button>
+                <button id="confirm-swap-button" class="btn">Confirm Swap</button>
             </div>
 
-            <div id="email-input-page" class="space-y-6 hidden">
-                <h2 class="section-title">Enter Your Email</h2>
-                <p class="text-gray-600 mb-4">Please provide your email address. If there's a match, you'll receive an email with the other ticket holder's contact information.</p>
+            <div id="email-input-page" class="space-y-4 hidden">
+                <h2 class="text-2xl font-semibold text-gray-700">Enter Your Email</h2>
+                <p>Please provide your email address. If there's a match, you'll receive an email with the other ticket holder's contact information.</p>
                 <div class="form-group">
                     <label for="email-input" class="form-label">Email:</label>
-                    <input type="email" id="email-input" class="form-input" required placeholder="your.email@example.com" class="form-input">
+                    <input type="email" id="email-input" class="form-input" required placeholder="your.email@example.com">
                     <div id="email-input-error" class="error-message" style="display: none;"></div>
                 </div>
                 <button id="submit-email-button" class="btn">Submit</button>
             </div>
 
-            <div id="success-message" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-6 hidden" role="alert">
+            <div id="success-message" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4 hidden" role="alert">
                 <strong class="font-bold">Success!</strong>
-                <span class="block sm:inline">You've successfully submitted your request for a ticket swap. We'll notify you if there is a match.</span>
+                <span class="block sm:inline">You've successfully submitted your request for a ticket swap.</span>
             </div>
         </div>
     </div>
@@ -87,41 +67,32 @@
     <script>
        // Sample data (replace with actual data from server)
         const userTickets = [
-            { id: 1, name: "Parasite", screeningDate: "2024-05-15", screeningTime: "18:00" },
-            { id: 2, name: "The French Dispatch", screeningDate: "2024-05-16", screeningTime: "21:00" },
-            { id: 3, name: "Dune", screeningDate: "2024-05-17", screeningTime: "15:00" },
+            { id: 1, name: "Parasite", screeningDate: "2024-05-14", screeningTime: "18:00" },
+            { id: 2, name: "The French Dispatch", screeningDate: "2024-05-15", screeningTime: "21:00" },
+            { id: 3, name: "Dune", screeningDate: "2024-05-16", screeningTime: "15:00" },
         ];
 
         const screenings = [
-            { id: 101, name: "Parasite", screeningDate: "2024-05-15", screeningTime: "18:00" },
-            { id: 102, name: "Parasite", screeningDate: "2024-05-16", screeningTime: "20:00" },
-            { id: 201, name: "The French Dispatch", screeningDate: "2024-05-16", screeningTime: "21:00" },
-            { id: 202, name: "The French Dispatch", screeningDate: "2024-05-17", screeningTime: "19:00" },
-             { id: 301, name: "Dune", screeningDate: "2024-05-17", screeningTime: "15:00" },
-            { id: 302, name: "Dune", screeningDate: "2024-05-18", screeningTime: "22:00" },
+            { id: 101, name: "Parasite", screeningDate: "2024-05-14", screeningTime: "18:00", venue: "Grand Theater", isFull: true },
+            { id: 102, name: "Parasite", screeningDate: "2024-05-15", screeningTime: "20:00", venue: "Lumière", isFull: false },
+            { id: 201, name: "The French Dispatch", screeningDate: "2024-05-15", screeningTime: "21:00", venue: "Debussy", isFull: true },
+            { id: 202, name: "The French Dispatch", screeningDate: "2024-05-16", screeningTime: "19:00", venue: "Grand Theater", isFull: false },
+            { id: 301, name: "Dune", screeningDate: "2024-05-16", screeningTime: "15:00", venue: "Lumière", isFull: false },
+            { id: 302, name: "Dune", screeningDate: "2024-05-18", screeningTime: "22:00", venue: "Debussy", isFull: true },
         ];
+        const validDates = ["2024-05-14", "2024-05-15", "2024-05-16"];
+
 
         // Get DOM elements for all pages
         const ticketSelectionPage = document.getElementById("ticket-selection-page");
         const confirmationPage = document.getElementById("confirmation-page");
         const emailInputPage = document.getElementById("email-input-page");
         const successMessage = document.getElementById("success-message");
+        const datePicker = document.getElementById("date-picker");
+        const screeningSelectionContainers = document.getElementById("screening-selection-containers");
+
 
         const myTicketsDropdown = document.getElementById("my-tickets");
-        const myTicketsDropdownWrapper = document.getElementById("my-tickets-dropdown-wrapper");
-        const myTicketsTrigger = document.getElementById("my-tickets-trigger");
-        const myTicketsOptions = document.getElementById("my-tickets-options");
-        const myTicketsList = document.getElementById("my-tickets-list");
-        const myTicketsError = document.getElementById("my-tickets-error");
-
-
-        const screeningListDropdown = document.getElementById("screening-list");
-        const screeningListDropdownWrapper = document.getElementById("screening-list-dropdown-wrapper");
-        const screeningListTrigger = document.getElementById("screening-list-trigger");
-        const screeningListOptions = document.getElementById("screening-list-options");
-        const screeningListUl = document.getElementById("screening-list-ul");
-        const screeningListError = document.getElementById("screening-list-error");
-
         const confirmSelectionButton = document.getElementById("confirm-selection-button");
         const goBackButton = document.getElementById("go-back-button");
         const confirmSwapButton = document.getElementById("confirm-swap-button");
@@ -132,8 +103,7 @@
         let selectedOfferedTicketId = null;
         let selectedRequestedTicketId = null;
         let userEmail = "";
-        let isMyTicketDropdownOpen = false;
-        let isScreeningDropdownOpen = false;
+        let selectedDate = null;
 
         // Function to show a specific page
         function showPage(pageId) {
@@ -141,68 +111,120 @@
             confirmationPage.classList.add("hidden");
             emailInputPage.classList.add("hidden");
             successMessage.classList.add("hidden");
-
             document.getElementById(pageId).classList.remove("hidden");
         }
 
-        // Populate dropdowns
-        function populateDropdowns() {
-            myTicketsList.innerHTML = '<li data-value="" class="selected">Select a ticket you have</li>';
-            userTickets.forEach(ticket => {
-                const li = document.createElement("li");
-                li.textContent = `${ticket.name} (${ticket.screeningDate} ${ticket.screeningTime})`;
-                li.setAttribute("data-value", ticket.id);
-                myTicketsList.appendChild(li);
+        // Function to populate date picker
+        function populateDatePicker() {
+            //const uniqueDates = [...new Set(screenings.map(screening => screening.screeningDate))];
+            const dateMap = {
+                "2024-05-14": { display: "May 14", day: "WED" },
+                "2024-05-15": { display: "May 15", day: "THU" },
+                "2024-05-16": { display: "May 16", day: "FRI" }
+            };
 
-                 const option = document.createElement("option");
-                option.value = ticket.id;
-                option.textContent = `${ticket.name} (${ticket.screeningDate} ${ticket.screeningTime})`;
-                myTicketsDropdown.appendChild(option);
-            });
-
-
-
-            screeningListUl.innerHTML = '<li data-value="" class="selected">Select a screening you want</li>';
-            // Filter screenings to exclude the user's own ticket
-            const availableScreenings = screenings.filter(screening => {
-                return !userTickets.some(userTicket => userTicket.id === screening.id);
-            });
-
-            availableScreenings.forEach(screening => {
-                const li = document.createElement("li");
-                li.textContent = `${screening.name} (${screening.screeningDate} ${screening.screeningTime})`;
-                 li.setAttribute("data-value", screening.id);
-                screeningListUl.appendChild(li);
-
-                const option = document.createElement("option");
-                option.value = screening.id;
-                option.textContent = `${screening.name} (${screening.screeningDate} ${screening.screeningTime})`;
-                screeningListDropdown.appendChild(option);
+            validDates.forEach(date => {
+                const dateButton = document.createElement("button");
+                dateButton.textContent = dateMap[date].display;
+                dateButton.classList.add("btn", "btn-secondary", "date-button");
+                dateButton.setAttribute('data-date', date);
+                dateButton.addEventListener("click", () => {
+                    selectedDate = date;
+                    document.querySelectorAll('.date-button').forEach(button => button.classList.remove('active'));
+                    dateButton.classList.add('active');
+                    populateDropdowns(date);
+                });
+                datePicker.appendChild(dateButton);
             });
         }
 
+        // Function to populate dropdowns
+        function populateDropdowns(date) {
+            screeningSelectionContainers.innerHTML = '';
+            const filteredScreenings = date ? screenings.filter(screening => screening.screeningDate === date) : screenings;
 
+            if (filteredScreenings.length === 0) {
+                screeningSelectionContainers.innerHTML = '<p class="text-gray-500">No screenings available for this date.</p>';
+                return;
+            }
+
+            const dateMap = {
+                "2024-05-14": { display: "May 14", day: "WED" },
+                "2024-05-15": { display: "May 15", day: "THU" },
+                "2024-05-16": { display: "May 16", day: "FRI" }
+            };
+
+            filteredScreenings.forEach(screening => {
+                const screeningCard = document.createElement("div");
+                screeningCard.className = "screening-card";
+
+                const dateContainer = document.createElement("div");
+                dateContainer.className = "date-with-day";
+                const dayOfWeek = document.createElement("div");
+                dayOfWeek.className = "day-of-week";
+                dayOfWeek.textContent = dateMap[screening.screeningDate].day;
+                const dateNumeric = document.createElement("div");
+                dateNumeric.className = "date-numeric";
+                dateNumeric.textContent = dateMap[screening.screeningDate].display;
+                dateContainer.appendChild(dayOfWeek);
+                dateContainer.appendChild(dateNumeric);
+
+
+                const title = document.createElement("div");
+                title.className = "screening-title";
+                title.textContent = screening.name;
+
+                const details = document.createElement("div");
+                details.className = "screening-details";
+                details.textContent = `${screening.screeningTime} - ${screening.venue}`;
+
+                screeningCard.appendChild(dateContainer);
+                screeningCard.appendChild(title);
+                screeningCard.appendChild(details);
+
+                const button = document.createElement("button");
+                button.className =  "full-button";
+                button.textContent =  "I HAVE A TICKET";
+                button.disabled = screening.isFull;
+                button.setAttribute('data-screening-id', screening.id);
+                button.addEventListener('click', handleScreeningSelect);
+                screeningCard.appendChild(button);
+
+                screeningSelectionContainers.appendChild(screeningCard);
+            });
+        }
+
+        function handleScreeningSelect(event) {
+            const button = event.target;
+             if (button.textContent === "I HAVE A TICKET") {
+                button.textContent = "SELECTED";
+                button.className = "full-button selected-button";
+            }
+        }
 
         // Event listener for confirm selection button (Page 1 -> Page 2)
         confirmSelectionButton.addEventListener("click", () => {
             selectedOfferedTicketId = parseInt(myTicketsDropdown.value);
-            selectedRequestedTicketId = parseInt(screeningListDropdown.value);
+            const selectedButton = document.querySelector('.screening-card button.selected-button');
+
 
             if (!selectedOfferedTicketId) {
                 myTicketsError.textContent = "Please select a ticket you have.";
                 myTicketsError.style.display = "block";
                 return;
-            }  else {
+            } else {
                 myTicketsError.style.display = "none";
             }
 
-            if (!selectedRequestedTicketId) {
-                screeningListError.textContent = "Please select a screening you want.";
+             if (!selectedButton) {
+                screeningListError.textContent = "Please select a screening.";
                 screeningListError.style.display = "block";
                 return;
             } else {
                 screeningListError.style.display = "none";
             }
+            selectedRequestedTicketId = parseInt(selectedButton.getAttribute('data-screening-id'));
+
 
             if (selectedOfferedTicketId === selectedRequestedTicketId) {
                 alert("You cannot select the same ticket for swapping!");
@@ -215,7 +237,43 @@
             offeredTicketNameDisplay.textContent = `${offeredTicket.name} (${offeredTicket.screeningDate} ${offeredTicket.screeningTime})`;
             requestedTicketNameDisplay.textContent = `${requestedTicket.name} (${requestedTicket.screeningDate} ${requestedTicket.screeningTime})`;
 
+            // 1.  Data Collection
+            const swapData = {
+                offeredTicketId: selectedOfferedTicketId,
+                requestedTicketId: selectedRequestedTicketId,
+            };
+
+            // 2.  Send data to the server using fetch
+            fetch('/api/ticket-swap', {  //  Endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(swapData), // Convert data to JSON
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then(data => {
+                // 3. Handle the server response
+                console.log('Server response:', data);
+                if (data.success) {
+                    showPage("confirmation-page");
+                } else {
+                    alert('Failed to submit ticket swap. Please try again.');
+                }
+            })
+            .catch(error => {
+                // 4. Handle errors
+                console.error('Error submitting ticket swap:', error);
+                alert('An error occurred while submitting your request. Please check your connection and try again.');
+            });
+
             showPage("confirmation-page");
+
         });
 
         // Event listener for go back button (Page 2 -> Page 1)
@@ -245,7 +303,7 @@
             }
 
             // In a real application, you would send this data to your server
-            console.log("Swap request submitted with email:", userEmail);
+            console.log("User Email:", userEmail);
              // Simulate sending data to the server
             setTimeout(() => {
                 showPage("success-message");
@@ -254,62 +312,15 @@
 
         // Email validation function
         function validateEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(String(email).toLowerCase());
         }
 
         // Initialize
-        populateDropdowns();
+        populateDatePicker();
+        populateDropdowns(selectedDate);
         showPage("ticket-selection-page");
 
-        // Custom Dropdown Logic
-        document.addEventListener('click', (e) => {
-            if (e.target === myTicketsTrigger || e.target.closest('.custom-select-trigger') === myTicketsTrigger) {
-                myTicketsDropdownWrapper.classList.toggle('open');
-                isMyTicketDropdownOpen = !isMyTicketDropdownOpen;
-                if (isMyTicketDropdownOpen) {
-                     screeningListDropdownWrapper.classList.remove('open');
-                     isScreeningDropdownOpen = false;
-                }
-            } else if (!e.target.closest('.custom-options') && isMyTicketDropdownOpen) {
-                myTicketsDropdownWrapper.classList.remove('open');
-                isMyTicketDropdownOpen = false;
-            }
-
-             if (e.target === screeningListTrigger || e.target.closest('.custom-select-trigger') === screeningListTrigger) {
-                screeningListDropdownWrapper.classList.toggle('open');
-                 isScreeningDropdownOpen = !isScreeningDropdownOpen;
-                  if (isScreeningDropdownOpen) {
-                    myTicketsDropdownWrapper.classList.remove('open');
-                    isMyTicketDropdownOpen = false;
-                }
-            } else if (!e.target.closest('.custom-options') && isScreeningDropdownOpen) {
-                screeningListDropdownWrapper.classList.remove('open');
-                isScreeningDropdownOpen = false;
-            }
-        });
-
-        myTicketsList.addEventListener('click', (e) => {
-            if (e.target.tagName === 'LI') {
-                const value = e.target.getAttribute('data-value');
-                const text = e.target.textContent;
-                myTicketsTrigger.querySelector('span').textContent = text;
-                myTicketsDropdown.value = value;
-                myTicketsDropdownWrapper.classList.remove('open');
-                 isMyTicketDropdownOpen = false;
-            }
-        });
-
-        screeningListUl.addEventListener('click', (e) => {
-            if (e.target.tagName === 'LI') {
-                const value = e.target.getAttribute('data-value');
-                const text = e.target.textContent;
-                screeningListTrigger.querySelector('span').textContent = text;
-                screeningListDropdown.value = value;
-                screeningListDropdownWrapper.classList.remove('open');
-                isScreeningDropdownOpen = false;
-            }
-        });
     </script>
 </body>
 </html>

@@ -6,8 +6,115 @@
     <title>Cannes Ticket Swap</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     
+    <style>
+        .screening-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100px;
+        }
+
+        .screening-details {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .screening-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 4px;
+        }
+
+        .full-button {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 12px;
+            margin-top: 8px;
+            align-self: flex-start;
+        }
+
+        .full-button:hover {
+            background-color: #c53030;
+        }
+
+        .date-button.active {
+            background-color: #4a5568;
+            color: white;
+        }
+
+        #screening-selection-containers {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .selected-button {
+            background-color: #48bb78;
+            color: white;
+            pointer-events: none;
+        }
+        .selected-button:hover {
+             background-color: #48bb78;
+        }
+
+        .date-with-day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .day-of-week {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 2px;
+        }
+
+        .date-numeric {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #confirm-selection-button {
+            margin-top: 20px;
+        }
+
+        .header-container {
+            background: linear-gradient(to right, #F59E0B, #A7F3D0); /* Apply gradient to the container */
+            padding: 1rem 0; /* Add padding to the container */
+            margin-bottom: 2rem;
+            text-align: center; /* Center the heading */
+        }
+
+        .header-text {
+            color: white; /* Set the text color to white */
+            font-weight: 700;  /* Make the text bold */
+            font-size: 2.5rem; /* Adjust size as needed */
+            display: inline-block; /* Ensure the text is treated as a block */
+        }
+       .full-text {
+            color: #e53e3e;
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 8px;
+            align-self: flex-start;
+        }
+
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-4">

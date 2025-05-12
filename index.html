@@ -113,7 +113,110 @@
             margin-top: 8px;
             align-self: flex-start;
         }
+        .form-group {
+            margin-bottom: 1rem;
+        }
 
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #D1D5DB;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: #4B5563;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .error-message {
+            color: #DC2626;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            color: white;
+            background-color: #3B82F6;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #2563EB;
+        }
+
+        .btn-secondary {
+            background-color: #6B7280;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4B5563;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #D1D5DB;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: #4B5563;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+            transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .error-message {
+            color: #DC2626;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -141,7 +244,7 @@
                 <p>You are offering your ticket for: <span id="offered-ticket-name" class="font-semibold"></span></p>
                 <p>In exchange for a ticket to: <span id="requested-ticket-name" class="font-semibold"></span></p>
                 <button id="go-back-button" class="btn bg-gray-400 hover:bg-gray-500 mr-2">Go Back</button>
-                <button id="confirm-swap-button" class="btn">Confi<button id="confirm-selection-button" class="btn btn-primary">Confirm Selection</button>rm Swap</button>
+                <button id="confirm-swap-button" class="btn">Confirm Swap</button>
             </div>
 
             <div id="email-input-page" class="space-y-4 hidden">
@@ -209,6 +312,8 @@
         const successMessage = document.getElementById("success-message");
         const datePicker = document.getElementById("date-picker");
         const screeningSelectionContainers = document.getElementById("screening-selection-containers");
+        const offeredTicketNameDisplay = document.getElementById("offered-ticket-name");
+        const requestedTicketNameDisplay = document.getElementById("requested-ticket-name");
 
 
         const confirmSelectionButton = document.getElementById("confirm-selection-button");
@@ -237,9 +342,9 @@
         function populateDatePicker() {
             //const uniqueDates = [...new Set(screenings.map(screening => screening.screeningDate))];
             const dateMap = {
-                "2025-05-14": { display: "May 14", day: "WED" },
-                "2025-05-15": { display: "May 15", day: "THU" },
-                "2025-05-16": { display: "May 16", day: "FRI" }
+                "2024-05-14": { display: "May 14", day: "WED" },
+                "2024-05-15": { display: "May 15", day: "THU" },
+                "2024-05-16": { display: "May 16", day: "FRI" }
             };
 
             validDates.forEach(date => {
@@ -268,9 +373,9 @@
             }
 
             const dateMap = {
-                "2025-05-14": { display: "May 14", day: "WED" },
-                "2025-05-15": { display: "May 15", day: "THU" },
-                "2025-05-16": { display: "May 16", day: "FRI" }
+                "2024-05-14": { display: "May 14", day: "WED" },
+                "2024-05-15": { display: "May 15", day: "THU" },
+                "2024-05-16": { display: "May 16", day: "FRI" }
             };
 
             filteredScreenings.forEach(screening => {
@@ -331,235 +436,36 @@
                 button.textContent = "SELECTED";
                 button.className = "full-button selected-button";
             } else if (button.textContent === "SELECTED") {
-                 const index = selectedRequestedTickets[selectedDate].indexOf(screeningId);
-                  if (index > -1) {
-                    selectedRequestedTickets[selectedDate].splice(index, 1);
-                  }
-                button.textContent = "I HAVE A TICKET";
+                 const index = selectedRequestedTickets [selectedDate].indexOf(screeningId); 
+                if (index > -1) {
+                     selectedRequestedTickets [selectedDate].splice(index, 1);
+                 }
+                button.textContent = "I HAVE A TICKET"; 
                 button.className = "full-button";
             }
-        }
-
-        // Event listener for confirm selection button (Page 1 -> Page 2)
-        confirmSelectionButton.addEventListener("click", () => {
-            //selectedOfferedTicketId = parseInt(myTicketsDropdown.value);  // Removed dropdown
-           // Use the stored selected ticket id for the current date
-            selectedRequestedTicketId = selectedRequestedTickets[selectedDate];
 
 
-            if (!selectedOfferedTicketId) {
-                myTicketsError.textContent = "Please select a ticket you have.";
-                myTicketsError.style.display = "block";
-                return;
-            } else {
-                myTicketsError.style.display = "none";
-            }
+        irmSelectionButton.addEventListener("click", () => {
 
-             if (!selectedRequestedTicketId && !selectedOfferedTicketId) {
-        screeningListError.textContent = "Please select a screening.";
-        screeningListError.style.display = "block";
-        return;
-    } else if (!selectedOfferedTicketId) {
-        myTicketsError.textContent = "Please select a ticket you have.";
-        myTicketsError.style.display = "block";
-        return;
-    }
-     else if (!selectedRequestedTicketId) {
-        screeningListError.textContent = "Please select a screening.";
-        screeningListError.style.display = "block";
-        return;
-    }
+//selected0fferedTicketId = parseInt(myTicketsDropdown.value); Use the stored selected ticket id for the current date
 
-     else {
-        screeningListError.style.display = "none";
-        myTicketsError.style.display = "none";
-     }
+                selectedRequestedTicketId = selectedRequestedTickets [selectedDate];
 
-            if (selectedOfferedTicketId === selectedRequestedTicketId) {
-                alert("You cannot select the same ticket for swapping!");
-                return;
-            }
 
-            const offeredTicket = userTickets.find(ticket => ticket.id === selectedOfferedTicketId);
-            const requestedTicket = screenings.find(screening => screening.id === selectedRequestedTicketId);
 
-            offeredTicketNameDisplay.textContent = `${offeredTicket.name} (${offeredTicket.screeningDate} ${offeredTicket.screeningTime})`;
-            requestedTicketNameDisplay.textContent = `${requestedTicket.name} (${requestedTicket.screeningDate} ${requestedTicket.screeningTime})`;
+                 if (!selectedOfferedTicketId) {
+                     alert("Please select a ticket you have.");
+                     return;
+                 }
 
+                 if (!selectedRequestedTicketId) {
+                     alert("Please select a screening.");
+                     return;
+                 }
           
 
+                 if(selectedOfferedTicketId === selectedRequestedTicketId){
+                     alert("You cannot select the same ticket for swapping!");
+                     return;
+                 }
             
-// 1. Data Collection
-
-const swapData = {
-
-offeredTicketId: selectedOfferedTicketId,
-
-requestedTicketId: selectedRequestedTicketId,
-
-};
-
-            // 2. Send data to the server using fetch
-
-fetch('/api/ticket-swap', { // Replace '/api/ticket-swap' with your server endpoint
-
-method: 'POST',
-
-headers: {
-
-'Content-Type': 'application/json',
-
-},
-
-body: JSON.stringify(swapData), // Convert data to JSON
-
-})
-
-.then(response => {
-
-if (!response.ok) {
-
-throw new Error('Network response was not ok'); // Handle HTTP errors
-
-}
-
-return response.json(); // Parse the JSON response from the server
-
-})
-
-.then(data => {
-
-console.log('Success:', data);
-
-// Handle the response from the server (e.g., show a success message)
-
-if (data.success) {
-
-showPage("confirmation-page");
-
-}
-
-else{
-
-alert("Something went wrong");
-
-}
-
-
-
-})
-
-.catch(error => {
-
-console.error('Error:', error);
-
-// Handle errors (e.g., show an error message to the user)
-
-alert("Something went wrong");
-
-});
-
-
-
-showPage("confirmation-page");
-
-
-
-});
-
-
-
-// Event listener for go back button (Page 2 -> Page 1)
-
-goBackButton.addEventListener("click", () => {
-
-showPage("ticket-selection-page");
-
-});
-
-
-
-// Event listener for confirm swap button (Page 2 -> Page 3)
-
-confirmSwapButton.addEventListener("click", () => {
-
-showPage("email-input-page");
-
-});
-
-
-
-// Event listener for submit email button (Page 3 -> Success)
-
-submitEmailButton.addEventListener("click", () => {
-
-userEmail = emailInput.value.trim();
-
-            if (!userEmail) {
-
-emailInputError.textContent = "Please enter your email address.";
-
-emailInputError.style.display = "block";
-
-return;
-
-} else if (!validateEmail(userEmail)) {
-
-emailInputError.textContent = "Please enter a valid email address.";
-
-emailInputError.style.display = "block";
-
-return;
-
-} else {
-
-emailInputError.style.display = "none";
-
-}
-
-
-
-// In a real application, you would send this data to your server
-
-console.log("User Email:", userEmail);
-
-// Simulate sending data to the server
-
-setTimeout(() => {
-
-showPage("success-message");
-
-}, 1000);
-
-});
-
-
-
-// Email validation function
-
-function validateEmail(email) {
-
-const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-return re.test(String(email).toLowerCase());
-
-}
-
-
-
-// Initialize
-
-populateDatePicker();
-
-populateDropdowns(selectedDate);
-
-showPage("ticket-selection-page");
-
-
-
-</script>
-
-</body>
-
-</html>
-         

@@ -355,14 +355,25 @@
                 myTicketsError.style.display = "none";
             }
 
-             if (!selectedRequestedTicketId) {
-                screeningListError.textContent = "Please select a screening.";
-                screeningListError.style.display = "block";
-                return;
-            } else {
-                screeningListError.style.display = "none";
-            }
+             if (!selectedRequestedTicketId && !selectedOfferedTicketId) {
+        screeningListError.textContent = "Please select a screening.";
+        screeningListError.style.display = "block";
+        return;
+    } else if (!selectedOfferedTicketId) {
+        myTicketsError.textContent = "Please select a ticket you have.";
+        myTicketsError.style.display = "block";
+        return;
+    }
+     else if (!selectedRequestedTicketId) {
+        screeningListError.textContent = "Please select a screening.";
+        screeningListError.style.display = "block";
+        return;
+    }
 
+     else {
+        screeningListError.style.display = "none";
+        myTicketsError.style.display = "none";
+     }
 
             if (selectedOfferedTicketId === selectedRequestedTicketId) {
                 alert("You cannot select the same ticket for swapping!");

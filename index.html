@@ -6,7 +6,7 @@
     <title>Cannes Ticket Swap</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="styles.css">
     <style>
         .screening-card {
             background-color: white;
@@ -178,7 +178,7 @@
         ];
 
         const screenings = [
-            { id: 101, name: "ENZO", screeningDate: "2025-may-14", screeningTime: "8:45", venue: "Théâtre Croisette", isFull: true },
+            { id: 101, name: "Parasite", screeningDate: "2024-05-14", screeningTime: "18:00", venue: "Grand Theater", isFull: true },
             { id: 102, name: "Parasite", screeningDate: "2024-05-15", screeningTime: "20:00", venue: "Lumière", isFull: false },
             { id: 201, name: "The French Dispatch", screeningDate: "2024-05-15", screeningTime: "21:00", venue: "Debussy", isFull: true },
             { id: 202, name: "The French Dispatch", screeningDate: "2024-05-16", screeningTime: "19:00", venue: "Grand Theater", isFull: false },
@@ -206,7 +206,8 @@
         const emailInputError = document.getElementById("email-input-error");
 
         let selectedOfferedTicketId = null;
-        let selectedRequestedTicketId = null;
+        // Use an object to store selected ticket ids for each date
+        let selectedRequestedTickets = {};
         let userEmail = "";
         let selectedDate = null;
 
@@ -293,6 +294,11 @@
                 button.disabled = screening.isFull;
                 button.setAttribute('data-screening-id', screening.id);
                 button.addEventListener('click', handleScreeningSelect);
+                // Highlight the button if it was previously selected for this date
+                if (selectedRequestedTickets[date] === screening.id) {
+                    button.textContent = "SELECTED";
+                    button.className = "full-button selected-button";
+                }
                 screeningCard.appendChild(button);
 
                 screeningSelectionContainers.appendChild(screeningCard);
@@ -301,16 +307,27 @@
 
         function handleScreeningSelect(event) {
             const button = event.target;
-             if (button.textContent === "I HAVE A TICKET") {
+            const screeningId = parseInt(button.getAttribute('data-screening-id'));
+
+            if (button.textContent === "I HAVE A TICKET") {
+                // Store the selected ticket id for the current date
+                selectedRequestedTickets[selectedDate] = screeningId;
                 button.textContent = "SELECTED";
                 button.className = "full-button selected-button";
+            }
+             else if (button.textContent === "SELECTED") {
+                // Remove the selected ticket id for the current date
+                delete selectedRequestedTickets[selectedDate];
+                button.textContent = "I HAVE A TICKET";
+                button.className = "full-button";
             }
         }
 
         // Event listener for confirm selection button (Page 1 -> Page 2)
         confirmSelectionButton.addEventListener("click", () => {
             selectedOfferedTicketId = parseInt(myTicketsDropdown.value);
-            const selectedButton = document.querySelector('.screening-card button.selected-button');
+           // Use the stored selected ticket id for the current date
+            selectedRequestedTicketId = selectedRequestedTickets[selectedDate];
 
 
             if (!selectedOfferedTicketId) {
@@ -321,14 +338,13 @@
                 myTicketsError.style.display = "none";
             }
 
-             if (!selectedButton) {
+             if (!selectedRequestedTicketId) {
                 screeningListError.textContent = "Please select a screening.";
                 screeningListError.style.display = "block";
                 return;
             } else {
                 screeningListError.style.display = "none";
             }
-            selectedRequestedTicketId = parseInt(selectedButton.getAttribute('data-screening-id'));
 
 
             if (selectedOfferedTicketId === selectedRequestedTicketId) {
